@@ -10,369 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Spectral:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        --paper: #efe5ce;
-        --paper-2: #e7dbbf;
-        --ink: #2a2018;
-        --ink-soft: #5e5240;
-        --line: #9c8b66;
-        --land: #d8cdb0;
-        --du: #c03a24; /* double u  */
-        --dv: #2c6e63; /* double v  */
-        --se: #d69a2d; /* own name  */
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        margin: 0;
-        background: var(--paper);
-        color: var(--ink);
-        font-family: "Spectral", Georgia, serif;
-        -webkit-font-smoothing: antialiased;
-      }
-      body {
-        background-image:
-          radial-gradient(
-            120% 90% at 50% -10%,
-            rgba(255, 255, 255, 0.45),
-            transparent 55%
-          ),
-          radial-gradient(
-            140% 120% at 50% 120%,
-            rgba(90, 70, 40, 0.1),
-            transparent 60%
-          );
-        background-attachment: fixed;
-      }
-      .wrap {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 40px 24px 64px;
-      }
-
-      /* ---------- header ---------- */
-      .eyebrow {
-        font-family: "Space Mono", monospace;
-        font-size: 12px;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: var(--ink-soft);
-        margin: 0 0 14px;
-      }
-      h1 {
-        font-family: "Fraunces", serif;
-        font-weight: 900;
-        font-size: clamp(34px, 6vw, 62px);
-        line-height: 0.98;
-        margin: 0;
-        letter-spacing: -0.02em;
-      }
-      h1 em {
-        font-style: italic;
-        color: var(--du);
-      }
-      .dek {
-        font-size: clamp(16px, 2.1vw, 20px);
-        max-width: 60ch;
-        margin: 18px 0 0;
-        color: var(--ink-soft);
-      }
-      .dek b {
-        color: var(--ink);
-        font-weight: 600;
-      }
-
-      .glyphs {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        margin: 30px 0 6px;
-      }
-      .glyph {
-        flex: 1 1 160px;
-        border: 1.5px solid var(--ink);
-        border-radius: 3px;
-        padding: 16px 18px;
-        background: rgba(255, 255, 255, 0.28);
-        position: relative;
-        overflow: hidden;
-      }
-      .glyph .big {
-        font-family: "Fraunces", serif;
-        font-weight: 900;
-        font-size: 54px;
-        line-height: 1;
-      }
-      .glyph .lab {
-        font-family: "Space Mono", monospace;
-        font-size: 12px;
-        letter-spacing: 0.06em;
-        margin-top: 6px;
-        color: var(--ink-soft);
-      }
-      .glyph .nm {
-        font-weight: 600;
-        margin-top: 2px;
-      }
-      .glyph.du .big {
-        color: var(--du);
-      }
-      .glyph.dv .big {
-        color: var(--dv);
-      }
-      .glyph.se .big {
-        color: var(--se);
-      }
-      .glyph .corner {
-        position: absolute;
-        top: 8px;
-        right: 10px;
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-      }
-      .glyph.du .corner {
-        background: var(--du);
-      }
-      .glyph.dv .corner {
-        background: var(--dv);
-      }
-      .glyph.se .corner {
-        background: var(--se);
-      }
-
-      /* ---------- map ---------- */
-      .mapcard {
-        margin: 28px 0 0;
-        border: 1.5px solid var(--ink);
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.22);
-        padding: 10px 10px 4px;
-        box-shadow: 6px 7px 0 rgba(42, 32, 24, 0.12);
-      }
-      #map {
-        position: relative;
-        width: 100%;
-      }
-      #map svg {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-      .loadfail {
-        padding: 48px 24px;
-        text-align: center;
-        color: var(--ink-soft);
-        font-style: italic;
-      }
-
-      /* legend */
-      .legend {
-        display: flex;
-        gap: 22px;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 12px 8px 14px;
-        font-size: 15px;
-      }
-      .lg {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-      }
-      .sw {
-        width: 18px;
-        height: 18px;
-        border-radius: 3px;
-        border: 1px solid rgba(42, 32, 24, 0.35);
-      }
-      .sw-striped {
-        background: repeating-linear-gradient(
-          45deg,
-          var(--dv) 0 4px,
-          var(--du) 4px 8px
-        );
-      }
-      .lg b {
-        font-weight: 600;
-      }
-      .lg span {
-        color: var(--ink-soft);
-        font-family: "Space Mono", monospace;
-        font-size: 12px;
-      }
-
-      /* region key */
-      .rkey {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        padding: 16px 8px 6px;
-      }
-      @media (max-width: 720px) {
-        .rkey {
-          grid-template-columns: 1fr;
-        }
-      }
-      .rcol h4 {
-        margin: 0 0 10px;
-        font-family: "Space Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .rcol h4 .bar {
-        width: 22px;
-        height: 10px;
-        border-radius: 2px;
-        display: inline-block;
-      }
-      .rrow {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        align-items: baseline;
-        padding: 3px 0;
-        border-bottom: 1px dotted rgba(120, 104, 72, 0.35);
-        font-size: 13.5px;
-      }
-      .rrow .rn {
-        font-weight: 600;
-        color: var(--ink);
-      }
-      .rrow .rw {
-        font-family: "Space Mono", monospace;
-        font-size: 11.5px;
-        color: var(--ink-soft);
-        white-space: nowrap;
-      }
-      .rmisc {
-        display: flex;
-        gap: 22px;
-        flex-wrap: wrap;
-        padding: 10px 8px 4px;
-        font-size: 13px;
-        color: var(--ink-soft);
-        border-top: 1px solid var(--line);
-        margin-top: 6px;
-      }
-      .rmisc .lg b {
-        color: var(--ink);
-      }
-
-      /* tooltip */
-      .hoverinfo {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-      }
-      .wtip {
-        background: var(--ink);
-        color: var(--paper);
-        padding: 9px 12px;
-        border-radius: 4px;
-        font-family: "Spectral", serif;
-        min-width: 130px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-      }
-      .wtip-region {
-        font-family: "Space Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: #e7d6a8;
-      }
-      .wtip-word {
-        font-family: "Fraunces", serif;
-        font-style: italic;
-        font-weight: 600;
-        font-size: 19px;
-        line-height: 1.05;
-        margin-top: 2px;
-        color: #f4d58d;
-      }
-      .wtip-cat {
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 6px;
-        opacity: 0.92;
-      }
-      .wtip-country {
-        font-size: 12px;
-        margin-top: 5px;
-        padding-top: 5px;
-        color: rgba(239, 229, 206, 0.6);
-        border-top: 1px solid rgba(239, 229, 206, 0.18);
-      }
-      .wdot {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        display: inline-block;
-      }
-
-      /* the lonely-exception callout */
-      .callout {
-        margin: 26px 0 0;
-        border-left: 4px solid var(--du);
-        padding: 6px 0 6px 20px;
-      }
-      .callout p {
-        margin: 0;
-        font-size: clamp(17px, 2.3vw, 22px);
-        font-family: "Fraunces", serif;
-        font-weight: 500;
-        line-height: 1.3;
-      }
-      .callout p b {
-        color: var(--du);
-      }
-
-      /* notes */
-      .notes {
-        margin: 30px 0 0;
-        font-size: 13.5px;
-        color: var(--ink-soft);
-        line-height: 1.6;
-        border-top: 1px solid var(--line);
-        padding-top: 16px;
-      }
-      .notes h3 {
-        font-family: "Space Mono", monospace;
-        font-size: 12px;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: var(--ink);
-        margin: 0 0 10px;
-      }
-      .notes ul {
-        margin: 0;
-        padding-left: 18px;
-      }
-      .notes li {
-        margin: 0 0 6px;
-      }
-      .notes em {
-        color: var(--ink);
-        font-style: italic;
-      }
-      .foot {
-        margin-top: 22px;
-        font-family: "Space Mono", monospace;
-        font-size: 11px;
-        letter-spacing: 0.04em;
-        color: var(--ink-soft);
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="wrap">
@@ -552,7 +190,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.9/datamaps.world.min.js"></script>
     <script>
-      (function () {
+      (() => {
         var meta = {
           doubleU: { label: "“Double U”", color: "#C03A24" },
           doubleV: { label: "“Double V”", color: "#2C6E63" },
@@ -689,14 +327,14 @@
         }
 
         var data = {};
-        groups.forEach(function (g) {
-          g.c.forEach(function (code) {
+        groups.forEach((g) => {
+          g.c.forEach((code) => {
             data[code] = { fillKey: g.k, word: g.w, region: g.r };
           });
         });
 
         // Mexico uses BOTH: standard "doble ve" + everyday "doble u" → striped fill
-        data["MEX"] = {
+        data.MEX = {
           fillKey: "doubleV",
           mixed: true,
           word: "doble ve  +  doble u",
@@ -720,14 +358,15 @@
             highlightFillColor: "#3A2E1F",
             highlightBorderColor: "#3A2E1F",
             highlightBorderWidth: 0.6,
-            popupTemplate: function (geo, d) {
-              var key = d && d.fillKey ? d.fillKey : "na";
+            popupTemplate: (geo, d) => {
+              var key = d?.fillKey ? d.fillKey : "na";
               var m = meta[key];
-              var word = d && d.word ? d.word : "—";
-              var region =
-                d && d.region ? d.region : "No native W · other script";
+              var word = d?.word ? d.word : "—";
+              var region = d?.region
+                ? d.region
+                : "No native W · other script";
               var catRow;
-              if (d && d.mixed) {
+              if (d?.mixed) {
                 catRow =
                   '<div class="wtip-cat">' +
                   '<span class="wdot" style="background:' +
@@ -871,10 +510,10 @@
 
         d3.json(
           "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_1_states_provinces.geojson",
-          function (err, geo) {
+          (err, geo) => {
             if (err || !geo || !geo.features) return; // base map stays intact on failure
             var feats = [];
-            geo.features.forEach(function (f) {
+            geo.features.forEach((f) => {
               if (!isCanada(f)) return;
               var s = classify(f.properties || {});
               if (s) {
@@ -888,27 +527,25 @@
               .enter()
               .append("path")
               .attr("d", geoPath)
-              .style("fill", function (d) {
-                return d.__style.fill;
-              })
+              .style("fill", (d) => d.__style.fill)
               .style("stroke", "#C3B488")
               .style("stroke-width", 0.3)
-              .on("mousemove", function (d) {
+              .on("mousemove", (d) => {
                 var m = d3.mouse(el);
                 tip
                   .html(subTip(d.__style))
                   .style("display", "block")
-                  .style("left", m[0] + 14 + "px")
-                  .style("top", m[1] + 14 + "px");
+                  .style("left", `${m[0] + 14}px`)
+                  .style("top", `${m[1] + 14}px`);
               })
-              .on("mouseout", function () {
+              .on("mouseout", () => {
                 tip.style("display", "none");
               });
           },
         );
 
-        window.addEventListener("resize", function () {
-          if (map && map.resize) map.resize();
+        window.addEventListener("resize", () => {
+          if (map?.resize) map.resize();
         });
       })();
     </script>
