@@ -2,6 +2,12 @@
 
 Some interesting infographics.
 
+Please visit the [website](https://thomasleplus.github.io/infographics/) to see the infographics.
+
+## [W Letter Map](docs/w-letter-map/)
+
+[How the world names the letter W](https://thomasleplus.github.io/infographics/w-letter-map/) — a world map of what the letter *W* is called across linguistic regions.
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
