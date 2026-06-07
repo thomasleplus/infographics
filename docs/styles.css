@@ -9,31 +9,31 @@
   --dv: #2c6e63;
   --se: #d69a2d;
 }
+
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Spectral", Georgia, serif;
+  font-family: Spectral, Georgia, serif;
   -webkit-font-smoothing: antialiased;
 }
+
 body {
   background-image:
     radial-gradient(
       120% 90% at 50% -10%,
-      rgba(255, 255, 255, 0.45),
+      rgb(255 255 255 / 45%),
       transparent 55%
     ),
-    radial-gradient(
-      140% 120% at 50% 120%,
-      rgba(90, 70, 40, 0.1),
-      transparent 60%
-    );
+    radial-gradient(140% 120% at 50% 120%, rgb(90 70 40 / 10%), transparent 60%);
   background-attachment: fixed;
 }
+
 .wrap {
   max-width: 1080px;
   margin: 0 auto;
@@ -48,24 +48,28 @@ body {
   color: var(--ink-soft);
   margin: 0 0 14px;
 }
+
 h1 {
-  font-family: "Fraunces", serif;
+  font-family: Fraunces, serif;
   font-weight: 900;
   font-size: clamp(34px, 6vw, 62px);
   line-height: 0.98;
   margin: 0;
   letter-spacing: -0.02em;
 }
+
 h1 em {
   font-style: italic;
   color: var(--du);
 }
+
 .dek {
   font-size: clamp(16px, 2.1vw, 20px);
   max-width: 60ch;
   margin: 18px 0 0;
   color: var(--ink-soft);
 }
+
 .dek b {
   color: var(--ink);
   font-weight: 600;
@@ -78,13 +82,15 @@ h1 em {
   display: grid;
   gap: 16px;
 }
+
 .item {
   border: 1.5px solid var(--ink);
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.22);
-  box-shadow: 6px 7px 0 rgba(42, 32, 24, 0.12);
+  background: rgb(255 255 255 / 22%);
+  box-shadow: 6px 7px 0 rgb(42 32 24 / 12%);
   overflow: hidden;
 }
+
 .item a {
   display: flex;
   align-items: baseline;
@@ -93,22 +99,26 @@ h1 em {
   color: var(--ink);
   text-decoration: none;
 }
+
 .item a:hover {
-  background: rgba(255, 255, 255, 0.32);
+  background: rgb(255 255 255 / 32%);
 }
+
 .item .big {
-  font-family: "Fraunces", serif;
+  font-family: Fraunces, serif;
   font-weight: 900;
   font-size: 38px;
   line-height: 1;
   color: var(--du);
 }
+
 .item .ttl {
-  font-family: "Fraunces", serif;
+  font-family: Fraunces, serif;
   font-weight: 600;
   font-size: 22px;
   line-height: 1.2;
 }
+
 .item .lab {
   font-family: "Space Mono", monospace;
   font-size: 12px;
@@ -116,6 +126,7 @@ h1 em {
   color: var(--ink-soft);
   margin-top: 4px;
 }
+
 .item .arrow {
   margin-left: auto;
   font-family: "Space Mono", monospace;
