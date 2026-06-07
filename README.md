@@ -1,6 +1,6 @@
-# template
+# Infographics
 
-template
+Some interesting infographics.
 
 ## Contributing
 
