@@ -1,3 +1,4 @@
+/* global Datamap, d3 */
 (() => {
   var meta = {
     doubleU: { label: "“Double U”", color: "#C03A24" },
