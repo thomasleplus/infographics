@@ -325,7 +325,7 @@
         .style("left", `${pos[0] + 14}px`)
         .style("top", `${pos[1] + 14}px`);
     })
-    .on("mousemove", function (geo) {
+    .on("mousemove", (geo) => {
       var pos = d3.mouse(el);
       tip
         .html(countryPopup(geo, data[geo.id]))
