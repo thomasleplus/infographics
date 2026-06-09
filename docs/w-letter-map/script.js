@@ -164,50 +164,56 @@
     geographyConfig: {
       borderColor: "#C3B488",
       borderWidth: 0.25,
-      highlightFillColor: "#3A2E1F",
-      highlightBorderColor: "#3A2E1F",
-      highlightBorderWidth: 0.6,
-      popupTemplate: (geo, d) => {
-        var key = d?.fillKey ? d.fillKey : "na";
-        var m = meta[key];
-        var word = d?.word ? d.word : "—";
-        var region = d?.region ? d.region : "No native W · other script";
-        var catRow;
-        if (d?.mixed) {
-          catRow =
-            '<div class="wtip-cat">' +
-            '<span class="wdot" style="background:' +
-            meta.doubleV.color +
-            '"></span>' +
-            '<span class="wdot" style="background:' +
-            meta.doubleU.color +
-            ';margin-left:-3px"></span>' +
-            "Both names in use</div>";
-        } else {
-          catRow =
-            '<div class="wtip-cat"><span class="wdot" style="background:' +
-            m.color +
-            '"></span>' +
-            m.label +
-            "</div>";
-        }
-        return (
-          '<div class="wtip">' +
-          '<div class="wtip-region">' +
-          region +
-          "</div>" +
-          '<div class="wtip-word">' +
-          word +
-          "</div>" +
-          catRow +
-          '<div class="wtip-country">' +
-          geo.properties.name +
-          "</div>" +
-          "</div>"
-        );
-      },
+      // Custom hover handlers below replace datamaps' built-in, which had
+      // issues in Chrome (moveToFront reparenting broke mouseout restore).
+      highlightOnHover: false,
+      popupOnHover: false,
     },
   });
+
+  var HIGHLIGHT_FILL = "#3A2E1F";
+  var HIGHLIGHT_STROKE = "#3A2E1F";
+  var HIGHLIGHT_STROKE_WIDTH = 0.6;
+
+  function countryPopup(geo, d) {
+    var key = d?.fillKey ? d.fillKey : "na";
+    var m = meta[key];
+    var word = d?.word ? d.word : "—";
+    var region = d?.region ? d.region : "No native W · other script";
+    var catRow;
+    if (d?.mixed) {
+      catRow =
+        '<div class="wtip-cat">' +
+        '<span class="wdot" style="background:' +
+        meta.doubleV.color +
+        '"></span>' +
+        '<span class="wdot" style="background:' +
+        meta.doubleU.color +
+        ';margin-left:-3px"></span>' +
+        "Both names in use</div>";
+    } else {
+      catRow =
+        '<div class="wtip-cat"><span class="wdot" style="background:' +
+        m.color +
+        '"></span>' +
+        m.label +
+        "</div>";
+    }
+    return (
+      '<div class="wtip">' +
+      '<div class="wtip-region">' +
+      region +
+      "</div>" +
+      '<div class="wtip-word">' +
+      word +
+      "</div>" +
+      catRow +
+      '<div class="wtip-country">' +
+      geo.properties.name +
+      "</div>" +
+      "</div>"
+    );
+  }
 
   // --- Stripe Mexico in red + teal to show both names coexist ---
   var defs = map.svg.append("defs");
@@ -228,7 +234,7 @@
     .attr("width", 4.5)
     .attr("height", 9)
     .attr("fill", meta.doubleU.color);
-  // set fill via style so DataMaps' hover save/restore keeps the pattern
+  // set fill via style so the hover save/restore keeps the pattern
   map.svg.selectAll(".MEX").style("fill", "url(#mx-stripes)");
 
   // Second stripe pattern: teal + gold, for FR-vs-Germanic bilingual regions
@@ -262,6 +268,40 @@
     .style("position", "absolute")
     .style("display", "none")
     .style("pointer-events", "none");
+
+  map.svg
+    .selectAll(".datamaps-subunit")
+    .on("mouseover", function (geo) {
+      var $this = d3.select(this);
+      $this
+        .attr("data-orig-fill", $this.style("fill"))
+        .attr("data-orig-stroke", $this.style("stroke"))
+        .attr("data-orig-stroke-width", $this.style("stroke-width"))
+        .style("fill", HIGHLIGHT_FILL)
+        .style("stroke", HIGHLIGHT_STROKE)
+        .style("stroke-width", HIGHLIGHT_STROKE_WIDTH);
+      var pos = d3.mouse(el);
+      tip
+        .html(countryPopup(geo, data[geo.id]))
+        .style("display", "block")
+        .style("left", `${pos[0] + 14}px`)
+        .style("top", `${pos[1] + 14}px`);
+    })
+    .on("mousemove", function (geo) {
+      var pos = d3.mouse(el);
+      tip
+        .html(countryPopup(geo, data[geo.id]))
+        .style("left", `${pos[0] + 14}px`)
+        .style("top", `${pos[1] + 14}px`);
+    })
+    .on("mouseout", function () {
+      var $this = d3.select(this);
+      $this
+        .style("fill", $this.attr("data-orig-fill"))
+        .style("stroke", $this.attr("data-orig-stroke"))
+        .style("stroke-width", $this.attr("data-orig-stroke-width"));
+      tip.style("display", "none");
+    });
 
   function pname(p) {
     return (
