@@ -13,7 +13,18 @@
       k: "doubleU",
       r: "Anglosphere",
       w: "double-u",
-      c: ["USA", "GBR", "IRL", "CAN", "AUS", "NZL", "PHL", "BLZ"],
+      c: [
+        "USA",
+        "GBR",
+        "IRL",
+        "CAN",
+        "AUS",
+        "NZL",
+        "PHL",
+        "BLZ",
+        "JAM",
+        "BHS",
+      ],
     },
     {
       k: "doubleU",
@@ -45,6 +56,7 @@
         "PRY",
         "CUB",
         "DOM",
+        "PRI",
       ],
     },
     {
