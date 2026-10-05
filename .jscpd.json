@@ -1,3 +1,8 @@
 {
-  "ignore": ["docs/index.html", "docs/w-letter-map/index.html"]
+  "ignore": [
+    "docs/index.html",
+    "docs/w-letter-map/index.html",
+    ".github/workflows/osv-scanner-pr.yml",
+    ".github/workflows/osv-scanner.yml"
+  ]
 }
